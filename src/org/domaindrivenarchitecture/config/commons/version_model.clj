@@ -14,7 +14,7 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns org.domaindrivenarchitecture.pallet.crate.base.version-model
+(ns org.domaindrivenarchitecture.config.commons.version-model
    (:require [schema.core :as s :include-macros true]))
 
 (def Version
