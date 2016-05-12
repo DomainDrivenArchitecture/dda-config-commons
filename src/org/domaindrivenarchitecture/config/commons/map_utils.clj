@@ -14,7 +14,9 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns org.domaindrivenarchitecture.config.commons.map-utils)
+(ns org.domaindrivenarchitecture.config.commons.map-utils
+  (:require 
+     [schema.core :as s :include-macros true]))
 
 (defn deep-merge
   "Recursively merges maps. If keys are not maps, the last value wins."
@@ -22,3 +24,15 @@
   (if (every? map? vals)
     (apply merge-with deep-merge vals)
     (last vals)))
+
+(defn schema-keys
+  "returns all keys from schema."
+  [schema]
+  (map 
+    #(if (instance? schema.core.OptionalKey %) (:k %) % )
+    (keys schema)))
+
+(s/defn filter-for-target-schema
+  "filter a (partial-) config in order to match the given target schema."
+  [schema partial-config]
+  (select-keys partial-config (schema-keys schema)))

@@ -22,15 +22,35 @@
     [org.domaindrivenarchitecture.config.commons.map-utils :as sut]
     ))
 
-(deftest deep-merge
- (testing 
-   "test wheter deep merge works" 
-     (is (= {:a {:a_a "a2.a"
+(deftest deep-merge-test
+ (testing  
+   (is (= {:a {:a_a "a2.a"
+               :a_b "a1.b"}
+           :b {:b_b "b1.b"}}
+          (sut/deep-merge
+            {:a {:a_a "a1.a"
                  :a_b "a1.b"}
              :b {:b_b "b1.b"}}
-            (sut/deep-merge
-              {:a {:a_a "a1.a"
-                   :a_b "a1.b"}
-               :b {:b_b "b1.b"}}
-              {:a {:a_a "a2.a"}})))
+            {:a {:a_a "a2.a"}})))
+     ))
+
+(deftest schema-keys-test
+ (testing  
+   (is (= :a
+          (first (sut/schema-keys 
+                   {:a s/Bool}))))
+   (is (= :a
+          (first (sut/schema-keys 
+                   {(s/optional-key :a) s/Bool}))))
+     ))
+
+(deftest filter-test
+ (testing 
+   "test wheter deep merge works" 
+     (is (not (contains? 
+           (sut/filter-for-target-schema 
+             {:a s/Bool}
+             {:a :true
+              :b false})
+           :b)))
      ))
