@@ -4,13 +4,14 @@
   :license {:name "Apache License, Version 2.0"
             :url "https://www.apache.org/licenses/LICENSE-2.0.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [prismatic/schema "1.1.0"]
+                 [prismatic/schema "1.1.2"]
                  [metosin/schema-tools "0.9.0"]
                  ]
   :repositories [["snapshots" :clojars]
                  ["releases" :clojars]]
   :deploy-repositories [["snapshots" :clojars]
                         ["releases" :clojars]]
+  :plugins [[lein-sub "0.3.0"]]
   :profiles {:dev
              {:dependencies
               [[org.clojure/test.check "0.9.0"]
