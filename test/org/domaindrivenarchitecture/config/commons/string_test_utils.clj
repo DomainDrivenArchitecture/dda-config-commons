@@ -13,21 +13,8 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
+(ns org.domaindrivenarchitecture.config.commons.string-test-utils)
 
-(ns org.domaindrivenarchitecture.config.commons.directory-model
-   (:require 
-     [clojure.string :as string]
-     [schema.core :as s :include-macros true]))
-
-(s/defn non-root-directory? 
-  "Predicate for directory path not empty und not the unix root."
-  [dir :- s/Str]
-  (and 
-    (not (string/blank? dir))
-    (< 1 (.length dir))
-    (.endsWith dir "/")
-    ))
-
-(def NonRootDirectory
-  "Represents a directory with trailing /"
-  (s/constrained s/Str non-root-directory?))
+(defn trim-string-vector 
+  [string-vector] 
+  (filter #(not= % "") (map clojure.string/trim string-vector)))
