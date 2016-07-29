@@ -31,3 +31,7 @@
 (def NonRootDirectory
   "Represents a directory with trailing /"
   (s/constrained s/Str non-root-directory?))
+
+(defn trim-string-vector 
+  [string-vector] 
+  (filter #(not= % "") (map clojure.string/trim string-vector)))
