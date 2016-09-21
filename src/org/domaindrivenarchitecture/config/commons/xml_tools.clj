@@ -1,4 +1,4 @@
-(ns spielwiese.pallet.xml
+(ns org.domaindrivenarchitecture.config.commons.xml-tools
   (:require [clojure.xml :as xml]
             [clojure.pprint]
             [clojure.java.io]
