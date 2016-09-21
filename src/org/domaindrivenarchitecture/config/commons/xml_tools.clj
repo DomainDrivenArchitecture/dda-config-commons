@@ -1,4 +1,4 @@
-(ns org.domaindrivenarchitecture.config.commons.xml-tools
+(ns spielwiese.pallet.xml
   (:require [clojure.xml :as xml]
             [clojure.pprint]
             [clojure.java.io]
@@ -42,8 +42,8 @@
 
 (defn- xml-phases
   "Converts :phases information from session to xml"
-  [session]
-  (let [phases (remove #{:pallet/os} (da/phase-seq session))]
+  [session-data]
+  (let [phases (remove #{:pallet/os} (da/phase-seq session-data))]
     (struct xml/element 
       :phases {}
       (reduce
@@ -53,8 +53,8 @@
 
 (defn- xml-groups
   "Converts groups information from session to xml"
-  [session]
-  (let [groups (da/groups session)]
+  [session-data]
+  (let [groups (da/groups session-data)]
     (struct xml/element 
       :groups {}
       (reduce
@@ -118,9 +118,8 @@
 	    [] (-> run :action-results))))
 
 (defn- xml-runs
-  [session]
-  (let [session-data (if (:runs session) session (da/session-data session))
-        runs (-> session-data :runs)]
+  [session-data]
+  (let [runs (-> session-data :runs)]
     (struct xml/element
       :runs {}
       (reduce
@@ -132,13 +131,14 @@
   "Transform a session result (after pallet.api/lift or pallet.api/converge) into an XML structure.
    Use emit-xml(-to-string/file) to print the resulting xml file."
   [session]
-  (struct 
-    xml/element :session {} 
-    [(struct xml/element :session-data-map {} [(xml-cljmap session)])
-     (xml-phases session) 
-     (xml-groups session) 
-     (xml-runs session)]
-  ))
+  (let [session-data (if (:runs session) session (da/session-data session))]
+    (struct 
+      xml/element :session {} 
+      [(struct xml/element :session-data-map {} [(xml-cljmap session)])
+       (xml-phases session-data) 
+       (xml-groups session-data) 
+       (xml-runs session-data)]
+    )))
 
 (defn explain-plan-xml
   "Explains the actions created from a plan-function using a mock without executing the actions."
