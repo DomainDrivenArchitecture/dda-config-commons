@@ -1,4 +1,4 @@
-(defproject org.domaindrivenarchitecture/dda-config-commons "0.1.6-SNAPSHOT"
+(defproject org.domaindrivenarchitecture/dda-config-commons "0.1.6"
   :description "common utils for dda config"
   :url "https://www.domaindrivenarchitecture.org"
   :license {:name "Apache License, Version 2.0"
@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [prismatic/schema "1.1.3"]
                  [metosin/schema-tools "0.9.0"]
-                 [ch.qos.logback/logback-classic "1.0.9"]]
+                 [ch.qos.logback/logback-classic "1.1.7"]]
   :repositories [["snapshots" :clojars]
                  ["releases" :clojars]]
   :deploy-repositories [["snapshots" :clojars]
