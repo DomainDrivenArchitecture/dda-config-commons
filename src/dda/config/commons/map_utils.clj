@@ -14,8 +14,8 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns org.domaindrivenarchitecture.config.commons.map-utils
-  (:require 
+(ns dda.config.commons.map-utils
+  (:require
      [schema.core :as s :include-macros true]))
 
 (defn deep-merge
@@ -28,8 +28,8 @@
 (defn schema-keys
   "returns all keys from schema."
   [schema]
-  (map 
-    #(if (instance? schema.core.OptionalKey %) (:k %) % )
+  (map
+    #(if (instance? schema.core.OptionalKey %) (:k %) %)
     (keys schema)))
 
 (s/defn filter-for-target-schema

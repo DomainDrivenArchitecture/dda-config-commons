@@ -13,8 +13,24 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-(ns org.domaindrivenarchitecture.config.commons.string-test-utils)
 
-(defn trim-string-vector 
-  [string-vector] 
-  (filter #(not= % "") (map clojure.string/trim string-vector)))
+(ns dda.config.commons.directory-model-test
+  (:require
+    [clojure.test :refer :all]
+    [dda.config.commons.directory-model :as sut]))
+
+
+
+(deftest test-NonRootDirectory
+  (testing
+    "test the predicate"
+    (is (= false
+           (sut/non-root-directory? nil)))
+    (is (= false
+           (sut/non-root-directory? "")))
+    (is (= false
+           (sut/non-root-directory? "ends without slash")))
+    (is (= false
+           (sut/non-root-directory? "/")))
+    (is (= true
+           (sut/non-root-directory? "/var/lib/")))))

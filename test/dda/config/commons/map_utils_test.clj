@@ -14,16 +14,16 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns org.domaindrivenarchitecture.config.commons.map-utils-test
+(ns dda.config.commons.map-utils-test
   (:require
     [clojure.test :refer :all]
     [schema.core :as s]
     [schema.experimental.complete :as c]
-    [org.domaindrivenarchitecture.config.commons.map-utils :as sut]
-    ))
+    [dda.config.commons.map-utils :as sut]))
+
 
 (deftest deep-merge-test
- (testing  
+ (testing
    (is (= {:a {:a_a "a2.a"
                :a_b "a1.b"}
            :b {:b_b "b1.b"}}
@@ -31,26 +31,25 @@
             {:a {:a_a "a1.a"
                  :a_b "a1.b"}
              :b {:b_b "b1.b"}}
-            {:a {:a_a "a2.a"}})))
-     ))
+            {:a {:a_a "a2.a"}})))))
+
 
 (deftest schema-keys-test
- (testing  
+ (testing
    (is (= :a
-          (first (sut/schema-keys 
+          (first (sut/schema-keys
                    {:a s/Bool}))))
    (is (= :a
-          (first (sut/schema-keys 
-                   {(s/optional-key :a) s/Bool}))))
-     ))
+          (first (sut/schema-keys
+                   {(s/optional-key :a) s/Bool}))))))
+
 
 (deftest filter-test
- (testing 
-   "test wheter deep merge works" 
-     (is (not (contains? 
-           (sut/filter-for-target-schema 
-             {:a s/Bool}
-             {:a :true
-              :b false})
-           :b)))
-     ))
+ (testing
+   "test wheter deep merge works"
+     (is (not (contains?
+               (sut/filter-for-target-schema
+                 {:a s/Bool}
+                 {:a :true
+                  :b false})
+               :b)))))
