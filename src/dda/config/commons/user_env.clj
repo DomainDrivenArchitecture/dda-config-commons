@@ -13,3 +13,6 @@
 (defn read-ssh-keys-to-pair-config
   [& args]
   (ssh-key/read-ssh-keys-to-pair-config args))
+
+(defn user-ssh-dir [& args]
+  (ssh-key/user-ssh-dir args))
