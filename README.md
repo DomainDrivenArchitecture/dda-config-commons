@@ -1,6 +1,6 @@
 # dda-pallet-commons
-[![Clojars Project](https://img.shields.io/clojars/v/dda/dda-pallet.svg)](https://clojars.org/dda/dda-pallet-commons)
-[![Build Status](https://travis-ci.org/DomainDrivenArchitecture/dda-pallet.svg?branch=master)](https://travis-ci.org/DomainDrivenArchitecture/dda-pallet-commons)
+[![Clojars Project](https://img.shields.io/clojars/v/dda/dda-config-commons.svg)](https://clojars.org/dda/dda-config-commons)
+[![Build Status](https://travis-ci.org/DomainDrivenArchitecture/dda-config-commons.svg?branch=master)](https://travis-ci.org/DomainDrivenArchitecture/dda-config-commons)
 
 ## compatability
 dda-pallet is compatible to the following versions
