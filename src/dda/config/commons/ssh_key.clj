@@ -13,13 +13,17 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-(ns dda.config.commons.user-env.os-user
+(ns dda.config.commons.ssh-key
   (:require
-    [schema.core :as s]))
+   [schema.core :as s]))
 
-(defn user-home-dir
-  "provides the user home path."
-  [user-name]
-  (if (= user-name "root")
-    "/root"
-    (str "/home/" user-name)))
+(def PublicSshKey
+  {:type s/Str
+   :public-key s/Str
+   :comment s/Str})
+
+(def PrivateSshKey s/Str)
+
+(def SshKeyPair
+  {:public-key PublicSshKey
+   :private-key PrivateSshKey})
