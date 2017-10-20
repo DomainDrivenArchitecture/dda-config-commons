@@ -1,10 +1,10 @@
-(defproject dda/dda-config-commons "0.2.3-SNAPSHOT"
+(defproject dda/dda-config-commons "0.2.3"
   :description "common utils for dda config"
   :url "https://www.domaindrivenarchitecture.org"
   :license {:name "Apache License, Version 2.0"
             :url "https://www.apache.org/licenses/LICENSE-2.0.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [prismatic/schema "1.1.6"]
+                 [prismatic/schema "1.1.7"]
                  [metosin/schema-tools "0.9.0"]
                  [ch.qos.logback/logback-classic "1.2.3"]
                  [commons-codec "1.10"]]
@@ -15,7 +15,7 @@
   :plugins [[lein-sub "0.3.0"]]
   :profiles {:dev
              {:dependencies
-              [[org.clojure/test.check "0.9.0"]]}
+              [[org.clojure/test.check "0.10.0-alpha2"]]}
 
              :leiningen/reply
              {:dependencies []
