@@ -52,6 +52,6 @@
  [& {:keys [ssh-dir-path read-from-env?]}]
  "read ssh-keys from current node to ssh-key-pair-config. If read-from-env? flag is specified,
   ssh-private-key will be read from enviroment variable SSH_PRIV_KEY"
-   {:public-key (read-ssh-pub-key-to-config :ssh-dir-path ssh-dir-path)
-    :private-key (read-ssh-priv-key-to-config :ssh-dir-path ssh-dir-path
-                                              :read-from-env? read-from-env?)})
+ {:public-key (read-ssh-pub-key-to-config :ssh-dir-path ssh-dir-path)
+  :private-key (read-ssh-priv-key-to-config :ssh-dir-path ssh-dir-path
+                                            :read-from-env? read-from-env?)})
