@@ -51,8 +51,8 @@
 
 (s/defmethod ^:always-validate resolve-secret :password-store-record
   [secret :- Secret
-   & _])
-  ;(ps/get-secret-record (:password-store-record secret)))
+   & _]
+  (ps/get-secret-record (:password-store-record secret)))
 
 (s/defmethod ^:always-validate resolve-secret :password-store-multi
   [secret :- Secret
