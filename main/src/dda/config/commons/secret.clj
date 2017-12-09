@@ -18,11 +18,13 @@
     [schema.core :as s]
     [dda.config.commons.secret.passwordstore :as ps]))
 
+(def SecretSchemas
+  (into
+    [{:plain s/Str}]
+    ps/PasswordStore))
+
 (def Secret
-  (let [schemas (into
-                 [{:plain s/Str}]
-                 ps/PasswordStore)]
-    (apply s/either schemas)))
+    (apply s/either SecretSchemas))
 
 (s/defn dispatch-by-secret-type :- s/Keyword
   "Dispatcher for secret resolving. Also does a
