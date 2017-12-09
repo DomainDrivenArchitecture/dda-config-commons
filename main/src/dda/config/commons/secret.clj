@@ -16,14 +16,13 @@
 (ns dda.config.commons.secret
   (:require
     [schema.core :as s]
-    [dda.config.commons.passwordstore-adapter :as adapter]))
+    [dda.config.commons.secret.passwordstore :as ps]))
 
-(def Secret {(s/optional-key :plain) s/Str
-             (s/optional-key :password-store-single) s/Str
-             (s/optional-key :password-store-record) {:path s/Str
-                                                      :element (s/enum :password :login)}
-             (s/optional-key :password-store-multi) s/Str})
-
+(def Secret
+  (let [schemas (into
+                 [{:plain s/Str}]
+                 ps/PasswordStore)]
+    (apply s/either schemas)))
 
 (s/defn dispatch-by-secret-type :- s/Keyword
   "Dispatcher for secret resolving. Also does a
@@ -35,6 +34,7 @@
 (defmulti resolve-secret
   "resolves the secret"
   dispatch-by-secret-type)
+
 (s/defmethod ^:always-validate resolve-secret :default
   [secret :- Secret]
   (throw (UnsupportedOperationException. (str "Not impleneted yet: resolve-secret for " secret))))
@@ -43,11 +43,18 @@
   [secret :- Secret
    & _]
   (:plain secret))
+
 (s/defmethod ^:always-validate resolve-secret :password-store-single
   [secret :- Secret
    & _]
-  (adapter/get-secret-wo-newline (:password-store-single secret)))
+  (ps/get-secret-wo-newline (:password-store-single secret)))
+
+(s/defmethod ^:always-validate resolve-secret :password-store-record
+  [secret :- Secret
+   & _])
+  ;(ps/get-secret-record (:password-store-record secret)))
+
 (s/defmethod ^:always-validate resolve-secret :password-store-multi
   [secret :- Secret
    & _]
-  (adapter/get-secret (:password-store-multi secret)))
+  (ps/get-secret (:password-store-multi secret)))

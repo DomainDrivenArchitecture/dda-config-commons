@@ -14,11 +14,21 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns dda.config.commons.passwordstore-adapter
+(ns dda.config.commons.secret.passwordstore
   (:require
    [schema.core :as s]
    [clojure.string :as string]
    [clojure.java.shell :as sh]))
+
+(def PasswordStoreRecord
+  {:path s/Str
+   :element (s/enum :password :login)})
+
+(def PasswordStore
+  [{:password-store-single s/Str}
+   {:password-store-record PasswordStoreRecord}
+   {:password-store-multi s/Str}])
+
 
 (s/defn get-secret :- s/Str
   [path :- s/Str]

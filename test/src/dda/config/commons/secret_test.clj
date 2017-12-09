@@ -18,6 +18,7 @@
 (ns dda.config.commons.secret-test
   (:require
     [clojure.test :refer :all]
+    [schema.core :as s]
     [dda.config.commons.secret :as sut]))
 
 (defmethod sut/resolve-secret :test-resolver
@@ -27,6 +28,15 @@
 
 (def secret
   {:plain "test"})
+
+(deftest test-schema
+  (testing
+    (is (s/validate sut/Secret secret))
+    (is (s/validate sut/Secret  {:password-store-multi "path"}))
+    (is (s/validate sut/Secret  {:password-store-single "path"}))
+    (is (s/validate sut/Secret  {:password-store-record {:path "path"
+                                                         :element :login}}))
+    (is (thrown? Exception (s/validate sut/Secret {:not-implemented ""})))))
 
 (deftest test-secret-resolving
   (testing
