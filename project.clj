@@ -1,4 +1,4 @@
-(defproject dda/dda-config-commons "1.0.0"
+(defproject dda/dda-config-commons "1.0.1"
   :description "common utils for dda config"
   :url "https://www.domaindrivenarchitecture.org"
   :license {:name "Apache License, Version 2.0"
