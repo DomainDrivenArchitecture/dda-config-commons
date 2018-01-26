@@ -16,6 +16,7 @@
 (ns dda.config.commons.secret
   (:require
     [schema.core :as s]
+    [schema.spec.core :as spec]
     [dda.config.commons.secret.passwordstore :as ps]))
 
 (def SecretSchemas
@@ -60,3 +61,40 @@
   [secret :- Secret
    & _]
   (ps/get-secret (:password-store-multi secret)))
+
+(defn create-custom-resolved-schema
+  "Replaces all given secret-schemass within the given schema-config by Str."
+  [schema-config secret-schema]
+  (clojure.walk/postwalk
+    (fn [x]
+      (if (= x secret-schema)
+        s/Str
+        x))
+    schema-config))
+
+(defn create-resolved-schema
+  "Replaces all Secrets within the given schema-config by Str."
+  [schema-config]
+  (create-custom-resolved-schema schema-config Secret))
+
+(defn resolve-custom-secrets
+  "Takes a config, a corresponding schema and a secret-schema.
+   Resolves all secret-schemas within the config"
+  [config schema secret-schema]
+  (s/validate schema config)
+  ((spec/run-checker
+     (fn [s params]
+       (let [walk (spec/checker (s/spec s) params)]
+         (fn [x]
+           (if (= s secret-schema)
+             (resolve-secret x)
+             (walk x)))))
+     true
+     schema)
+   config))
+
+(defn resolve-secrets
+  "Takes a config and a corresponding schema.
+   Resolves all Secrets within the config."
+  [config schema]
+  (resolve-custom-secrets config schema Secret))
