@@ -66,7 +66,7 @@
   "Replaces all given secret-schemass within the given schema-config by Str."
   [schema-config secret-schema]
   (clojure.walk/postwalk
-    (fn [x] 
+    (fn [x]
       (if (= x secret-schema)
         s/Str
         x))
@@ -91,7 +91,7 @@
              (walk x)))))
      true
      schema)
-    config))
+   config))
 
 (defn resolve-secrets
   "Takes a config and a corresponding schema.
