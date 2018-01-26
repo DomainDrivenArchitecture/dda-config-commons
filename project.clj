@@ -1,11 +1,11 @@
-(defproject dda/dda-config-commons "1.0.2"
+(defproject dda/dda-config-commons "1.0.3"
   :description "common utils for dda config"
   :url "https://www.domaindrivenarchitecture.org"
   :license {:name "Apache License, Version 2.0"
             :url "https://www.apache.org/licenses/LICENSE-2.0.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [prismatic/schema "1.1.7"]
-                 [metosin/schema-tools "0.10.0-SNAPSHOT"]
+                 [metosin/schema-tools "0.9.1"]
                  [ch.qos.logback/logback-classic "1.3.0-alpha0"]
                  [commons-codec "1.11"]]
   :source-paths ["main/src"]
