@@ -46,6 +46,7 @@
     (is (= "test" (sut/resolve-secret secret)))))
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Tests for create-custom-resolved-schema ;;;
 ;;; and for resolve-custom-secrets.         ;;;
