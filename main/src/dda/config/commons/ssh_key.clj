@@ -16,7 +16,8 @@
 
 (ns dda.config.commons.ssh-key
   (:require
-   [schema.core :as s]))
+   [schema.core :as s]
+   [dda.config.commons.user-home :as user-home]))
 
 (def PublicSshKey
   {:type s/Str
@@ -55,11 +56,10 @@
    (System/getenv env-variable)))
 
 (defn user-home-dir
-  "provides the user home path."
+  "deprecated - pls use user-home/user-home-dir instead."
+  {:deprecated "1.2"}
   [user-name]
-  (if (= user-name "root")
-    "/root"
-    (str "/home/" user-name)))
+  (user-home/user-home-dir user-name))
 
 (defn user-ssh-dir
  "provides the user .ssh path."
