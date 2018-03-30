@@ -31,13 +31,8 @@
     (is (= [1000 2000 3000] (sut/ver_fromstr "1000.2000.3000"))))
 
   (testing "ver_str: vector to string conversion"
-    (is (= "" (sut/ver_str nil)))
-    (is (= "42" (sut/ver_str [42])))
-    (is (= "1.2" (sut/ver_str [1 2])))
     (is (= "1.2.3" (sut/ver_str [1 2 3])))
     (is (= "1000.2000.3000" (sut/ver_str [1000 2000 3000])))))
-
-
 
 (deftest version-compare
   (testing "ver_less"
@@ -68,5 +63,3 @@
     (is (= [1 2 3] (s/validate sut/Version [1 2 3])))
     (is (thrown? clojure.lang.ExceptionInfo (s/validate sut/Version [1 2 3.1])))
     (is (thrown? clojure.lang.ExceptionInfo (s/validate sut/Version [1 2 "3"])))))
-
-  
