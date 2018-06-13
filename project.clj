@@ -3,7 +3,7 @@
   :url "https://www.domaindrivenarchitecture.org"
   :license {:name "Apache License, Version 2.0"
             :url "https://www.apache.org/licenses/LICENSE-2.0.html"}
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
                  [prismatic/schema "1.1.9"]
                  [metosin/schema-tools "0.10.3"]
                  [ch.qos.logback/logback-classic "1.3.0-alpha0"]
