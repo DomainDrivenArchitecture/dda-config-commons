@@ -31,7 +31,11 @@
             {:a {:a_a "a1.a"
                  :a_b "a1.b"}
              :b {:b_b "b1.b"}}
-            {:a {:a_a "a2.a"}})))))
+            {:a {:a_a "a2.a"}})))
+  (is (= {:a #{:a1 :b1}}
+         (sut/deep-merge
+           {:a #{:a1}}
+           {:a #{:b1}})))))
 
 
 (deftest schema-keys-test

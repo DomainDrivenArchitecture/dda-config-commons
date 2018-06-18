@@ -19,11 +19,15 @@
      [schema.core :as s :include-macros true]))
 
 (defn deep-merge
-  "Recursively merges maps. If keys are not maps, the last value wins."
-  [& vals]
-  (if (every? map? vals)
-    (apply merge-with deep-merge vals)
-    (last vals)))
+  "Recursively merge maps."
+  [& ms]
+  (letfn [(f [l r]
+            (cond (and (map? l) (map? r))
+                  (deep-merge l r)
+                  (or (sequential? l) (set? l))
+                  (into l r)
+                  :else r))]
+    (apply merge-with f ms)))
 
 (defn schema-keys
   "returns all keys from schema."
