@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [prismatic/schema "1.1.9"]
                  [metosin/schema-tools "0.10.3"]
-                 [ch.qos.logback/logback-classic "1.3.0-alpha0"]
+                 [ch.qos.logback/logback-classic "1.3.0-alpha4"]
                  [commons-codec "1.11"]]
   :source-paths ["main/src"]
   :resource-paths ["main/resources"]
@@ -20,9 +20,9 @@
                    :resource-paths ["integration/resources"
                                     "test/resources"]
                    :dependencies
-                   [[org.clojure/test.check "0.10.0-alpha2"]
-                    [ch.qos.logback/logback-classic "1.3.0-alpha0"]
-                    [org.slf4j/jcl-over-slf4j "1.8.0-beta0"]]
+                   [[org.clojure/test.check "0.10.0-alpha3"]
+                    [ch.qos.logback/logback-classic "1.3.0-alpha4"]
+                    [org.slf4j/jcl-over-slf4j "1.8.0-beta2"]]
                    :plugins
                    [[lein-sub "0.3.0"]]
                    :leiningen/reply
