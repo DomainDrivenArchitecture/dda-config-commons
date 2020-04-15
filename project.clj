@@ -8,7 +8,8 @@
                  [mvxcvi/clj-pgp "0.10.0"]
                  [metosin/schema-tools "0.11.0"]
                  [ch.qos.logback/logback-classic "1.3.0-alpha4" :exclusions [com.sun.mail/javax.mail]]
-                 [commons-codec "1.12"]]
+                 [commons-codec "1.12"]
+                 [aero "1.1.6"]]
   :source-paths ["main/src"]
   :resource-paths ["main/resources"]
   :repositories [["snapshots" :clojars]
@@ -23,7 +24,8 @@
                    :dependencies
                    [[org.clojure/test.check "0.10.0-alpha4"]
                     [ch.qos.logback/logback-classic "1.3.0-alpha4"]
-                    [org.slf4j/jcl-over-slf4j "1.8.0-beta4"]]
+                    [org.slf4j/jcl-over-slf4j "1.8.0-beta4"]
+                    [dda/data-test "0.1.1"]]
                    :plugins
                    [[lein-sub "0.3.0"]]
                    :leiningen/reply
@@ -31,5 +33,5 @@
                     :exclusions [commons-logging]}}
              :test {:test-paths ["test/src"]
                     :resource-paths ["test/resources"]
-                    :dependencies []}}
+                    :dependencies [[dda/data-test "0.1.1"]]}}
   :local-repo-classpath true)

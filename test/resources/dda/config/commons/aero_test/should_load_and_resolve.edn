@@ -1,0 +1,2 @@
+{:input "test/resources/dda/config/commons/config.edn"
+ :expected {:hello "World!"}}
