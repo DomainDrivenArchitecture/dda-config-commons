@@ -15,7 +15,8 @@
 ; limitations under the License.
 
 
-(ns dda.config.commons.secret.passwordstore-test
+(ns dda.config.commons.1-5.secret.passwordstore-test
+  {:deprecated "1.5"}
   (:require
     [clojure.test :refer :all]
     [schema.core :as s]

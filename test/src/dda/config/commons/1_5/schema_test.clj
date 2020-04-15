@@ -1,4 +1,5 @@
-(ns dda.config.commons.schema-test
+(ns dda.config.commons.1-5.schema-test
+  {:deprecated "1.5"}
   (:require
    [clojure.string :as string]
    [clojure.test :refer :all]

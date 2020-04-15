@@ -13,7 +13,8 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-(ns dda.config.commons.gpg-key-test
+(ns dda.config.commons.1-5.gpg-key-test
+  {:deprecated "1.5"}
   (:require
    [clojure.test :refer :all]
    [dda.config.commons.gpg-key :as sut]))

@@ -14,7 +14,7 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns dda.config.commons.secret.passwordstore
+(ns dda.config.commons.1-5.secret.passwordstore
   (:require
    [schema.core :as s]
    [clojure.string :as string]

@@ -13,21 +13,10 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
+(ns dda.config.commons.1-5.string-test-utils
+  {:deprecated "1.5"}
+  )
 
-(ns dda.config.commons.gpg-key
-  (:require
-   [schema.core :as s]
-   [clj-pgp.core :as pgp]))
-
-(s/defn public-ascii-key? :- s/Bool
-  [ascii-key :- s/Str]
-  (if (empty? ascii-key)
-    false
-    (.startsWith ascii-key "-----BEGIN PGP PUBLIC KEY BLOCK-----" 0)))
-
-(def PublicGpgKey (s/pred public-ascii-key?))
-
-(s/defn hex-id
-  [ascii-key :- PublicGpgKey]
-  (pgp/hex-id 
-   (pgp/decode-public-key ascii-key)))
+(defn trim-string-vector
+  [string-vector]
+  (filter #(not= % "") (map clojure.string/trim string-vector)))

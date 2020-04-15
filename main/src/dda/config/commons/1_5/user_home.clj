@@ -13,25 +13,23 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-(ns dda.config.commons.ssh-key-test
+(ns dda.config.commons.1-5.user-home
+  {:deprecated "1.5"}
   (:require
-   [clojure.test :refer :all]
-   [schema.core :as s]
-   [dda.config.commons.ssh-key :as sut]))
+   [clojure.string :as string]
+   [schema.core :as s]))
 
-(def valid-ssh-pub-key-config
-  {:type "type"
-   :public-key "pub-key"
-   :comment "a comment"})
 
-(def valid-ssh-priv-key-config
-  "private key")
+(defn user-home-dir
+  "provides the user home path."
+  [user-name]
+  (if (= user-name "root")
+    "/root"
+    (str "/home/" user-name)))
 
-(def ssh-key-pair-config
-  {:public-key valid-ssh-pub-key-config
-   :private-key valid-ssh-priv-key-config})
-
-(deftest test-configs
-  (is (s/validate sut/PublicSshKey valid-ssh-pub-key-config))
-  (is (s/validate sut/PrivateSshKey valid-ssh-priv-key-config))
-  (is (s/validate sut/SshKeyPair ssh-key-pair-config)))
+(s/defn
+  flatten-user-home-path
+  [path]
+  (string/replace
+    (last (re-find #"(/root|/home/[^/]*)/(.*)" path))
+    #"/" "_"))

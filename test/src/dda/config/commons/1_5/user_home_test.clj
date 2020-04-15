@@ -13,30 +13,27 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-
-(ns dda.config.commons.map-utils
+(ns dda.config.commons.1-5.user-home-test
+  {:deprecated "1.5"}
   (:require
-     [schema.core :as s :include-macros true]))
+   [clojure.test :refer :all]
+   [schema.core :as s]
+   [dda.config.commons.user-home :as sut]))
 
-(defn deep-merge
-  "Recursively merge maps."
-  [& ms]
-  (letfn [(f [l r]
-            (cond (and (map? l) (map? r))
-                  (deep-merge l r)
-                  (or (sequential? l) (set? l))
-                  (into l r)
-                  :else r))]
-    (apply merge-with f ms)))
+(deftest test-user-home
+  (s/set-fn-validation! true)
+  (is (= "/root"
+         (sut/user-home-dir "root")))
+  (is (= "/home/another"
+         (sut/user-home-dir "another"))))
 
-(defn schema-keys
-  "returns all keys from schema."
-  [schema]
-  (map
-    #(if (instance? schema.core.OptionalKey %) (:k %) %)
-    (keys schema)))
-
-(s/defn filter-for-target-schema
-  "filter a (partial-) config in order to match the given target schema."
-  [schema partial-config]
-  (select-keys partial-config (schema-keys schema)))
+(deftest test-flatten-path
+  (s/set-fn-validation! true)
+  (is (= "some_path_xx"
+         (sut/flatten-user-home-path "/root/some/path_xx")))
+  (is (= "some_path"
+         (sut/flatten-user-home-path "/home/another/some/path")))
+  (is (= "_"
+         (sut/flatten-user-home-path "/home/another/_")))
+  (is (= "realy_long_path_"
+         (sut/flatten-user-home-path "/home/another/realy/long/path/"))))

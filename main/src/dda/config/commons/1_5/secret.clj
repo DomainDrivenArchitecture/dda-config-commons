@@ -13,7 +13,8 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-(ns dda.config.commons.secret
+(ns dda.config.commons.1-5.secret
+  {:deprecated "1.5"}
   (:require
     [schema.core :as s]
     [schema.spec.core :as spec]

@@ -13,22 +13,31 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-(ns dda.config.commons.user-home
+
+(ns dda.config.commons.1-5.map-utils
+  {:deprecated "1.5"}
   (:require
-   [clojure.string :as string]
-   [schema.core :as s]))
+     [schema.core :as s :include-macros true]))
 
+(defn deep-merge
+  "Recursively merge maps."
+  [& ms]
+  (letfn [(f [l r]
+            (cond (and (map? l) (map? r))
+                  (deep-merge l r)
+                  (or (sequential? l) (set? l))
+                  (into l r)
+                  :else r))]
+    (apply merge-with f ms)))
 
-(defn user-home-dir
-  "provides the user home path."
-  [user-name]
-  (if (= user-name "root")
-    "/root"
-    (str "/home/" user-name)))
+(defn schema-keys
+  "returns all keys from schema."
+  [schema]
+  (map
+    #(if (instance? schema.core.OptionalKey %) (:k %) %)
+    (keys schema)))
 
-(s/defn
-  flatten-user-home-path
-  [path]
-  (string/replace
-    (last (re-find #"(/root|/home/[^/]*)/(.*)" path))
-    #"/" "_"))
+(s/defn filter-for-target-schema
+  "filter a (partial-) config in order to match the given target schema."
+  [schema partial-config]
+  (select-keys partial-config (schema-keys schema)))

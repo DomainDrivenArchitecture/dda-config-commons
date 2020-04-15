@@ -14,7 +14,8 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns dda.config.commons.version-model-test
+(ns dda.config.commons.1-5.version-model-test
+  {:deprecated "1.5"}
   (:require
     [clojure.test :refer :all]
     [schema.core :as s]

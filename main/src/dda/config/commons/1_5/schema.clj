@@ -1,4 +1,5 @@
-(ns dda.config.commons.schema
+(ns dda.config.commons.1-5.schema
+  {:deprecated "1.5"}
   (:require [clojure.edn :as edn]
             [clojure.string :as string]))
 

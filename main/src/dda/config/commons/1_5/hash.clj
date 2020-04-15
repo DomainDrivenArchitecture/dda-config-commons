@@ -13,26 +13,27 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-(ns dda.config.commons.user-home-test
+(ns dda.config.commons.1-5.hash
+  {:deprecated "1.5"}
   (:require
-   [clojure.test :refer :all]
-   [schema.core :as s]
-   [dda.config.commons.user-home :as sut]))
+   [schema.core :as s])
+  (:import
+    (org.apache.commons.codec.digest Crypt)))
 
-(deftest test-user-home
-  (s/set-fn-validation! true)
-  (is (= "/root"
-         (sut/user-home-dir "root")))
-  (is (= "/home/another"
-         (sut/user-home-dir "another"))))
+(defn bash-escaped
+  "returns bash escaped string"
+  [#^String input]
+  (apply str
+    (map
+     (fn [a] (if (= a \$) "\\$" a))
+     (seq input))))
 
-(deftest test-flatten-path
-  (s/set-fn-validation! true)
-  (is (= "some_path_xx"
-         (sut/flatten-user-home-path "/root/some/path_xx")))
-  (is (= "some_path"
-         (sut/flatten-user-home-path "/home/another/some/path")))
-  (is (= "_"
-         (sut/flatten-user-home-path "/home/another/_")))
-  (is (= "realy_long_path_"
-         (sut/flatten-user-home-path "/home/another/realy/long/path/"))))
+(defn crypt
+  "Computes the linux crypt hashed & encoded representation of a string"
+  [#^String input]
+  (Crypt/crypt input))
+
+(defn crypt-bash-escaped
+  "returns bash escaped password"
+  [#^String input]
+  (bash-escaped (crypt input)))

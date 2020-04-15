@@ -14,23 +14,21 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns dda.config.commons.directory-model-test
+(ns dda.config.commons.1-5.gpg-key
+  {:deprecated "1.5"}
   (:require
-    [clojure.test :refer :all]
-    [dda.config.commons.directory-model :as sut]))
+   [schema.core :as s]
+   [clj-pgp.core :as pgp]))
 
+(s/defn public-ascii-key? :- s/Bool
+  [ascii-key :- s/Str]
+  (if (empty? ascii-key)
+    false
+    (.startsWith ascii-key "-----BEGIN PGP PUBLIC KEY BLOCK-----" 0)))
 
+(def PublicGpgKey (s/pred public-ascii-key?))
 
-(deftest test-NonRootDirectory
-  (testing
-    "test the predicate"
-    (is (= false
-           (sut/non-root-directory? nil)))
-    (is (= false
-           (sut/non-root-directory? "")))
-    (is (= false
-           (sut/non-root-directory? "ends without slash")))
-    (is (= false
-           (sut/non-root-directory? "/")))
-    (is (= true
-           (sut/non-root-directory? "/var/lib/")))))
+(s/defn hex-id
+  [ascii-key :- PublicGpgKey]
+  (pgp/hex-id 
+   (pgp/decode-public-key ascii-key)))

@@ -13,26 +13,25 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
-(ns dda.config.commons.hash
+
+(ns dda.config.commons.1-5.directory-model-test
+  {:deprecated "1.5"}
   (:require
-   [schema.core :as s])
-  (:import
-    (org.apache.commons.codec.digest Crypt)))
+    [clojure.test :refer :all]
+    [dda.config.commons.directory-model :as sut]))
 
-(defn bash-escaped
-  "returns bash escaped string"
-  [#^String input]
-  (apply str
-    (map
-     (fn [a] (if (= a \$) "\\$" a))
-     (seq input))))
 
-(defn crypt
-  "Computes the linux crypt hashed & encoded representation of a string"
-  [#^String input]
-  (Crypt/crypt input))
 
-(defn crypt-bash-escaped
-  "returns bash escaped password"
-  [#^String input]
-  (bash-escaped (crypt input)))
+(deftest test-NonRootDirectory
+  (testing
+    "test the predicate"
+    (is (= false
+           (sut/non-root-directory? nil)))
+    (is (= false
+           (sut/non-root-directory? "")))
+    (is (= false
+           (sut/non-root-directory? "ends without slash")))
+    (is (= false
+           (sut/non-root-directory? "/")))
+    (is (= true
+           (sut/non-root-directory? "/var/lib/")))))

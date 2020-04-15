@@ -14,40 +14,60 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-(ns dda.config.commons.user-env-1-1
-  {:deprecated "1.1"}
+(ns dda.config.commons.1-5.ssh-key
+  {:deprecated "1.5"}
   (:require
    [schema.core :as s]
-   [dda.config.commons.ssh-key :as schema]))
+   [dda.config.commons.user-home :as user-home]))
 
-(defn user-home-dir
-  "provides the user home path."
-  [user-name]
-  (if (= user-name "root")
-    "/root"
-    (str "/home/" user-name)))
+(def PublicSshKey
+  {:type s/Str
+   :public-key s/Str
+   :comment s/Str})
 
-(defn format-public-key
-  "returns a formatted public-key from an ssh-config"
-  [ssh-public-key-config]
-  (str
-   (:type ssh-public-key-config) " "
-   (:public-key ssh-public-key-config) " "
-   (:comment ssh-public-key-config)))
+(def PrivateSshKey s/Str)
 
-(s/defn string-to-pub-key-config [pub-key :- s/Str] :- schema/PublicSshKey
+(def SshKeyPair
+  {:public-key PublicSshKey
+   :private-key PrivateSshKey})
+
+(s/defn ^:always-validate
+  string-to-pub-key-config :- PublicSshKey
+  [pub-key :- s/Str]
   "function takes a public-key as a string and returns it as a ssh-public-key-config"
   (let [col (clojure.string/split pub-key #" ")]
     {:type (first col)
      :public-key (second col)
      :comment (nth col 2)}))
 
+(s/defn ^:always-validate
+  format-public-key :- s/Str
+  "returns a formatted public-key from an ssh-config"
+  [ssh-public-key-config :- PublicSshKey]
+  (str
+   (:type ssh-public-key-config) " "
+   (:public-key ssh-public-key-config) " "
+   (:comment ssh-public-key-config)))
+
+(s/defn
+  ssh-priv-key-from-env-to-config :- PrivateSshKey
+ "function reads ssh private key from environment variable and returns it as a String"
+ []
+ (let [env-variable "SSH_PRIV_KEY"]
+   (System/getenv env-variable)))
+
+(defn user-home-dir
+  "deprecated - pls use user-home/user-home-dir instead."
+  {:deprecated "1.2"}
+  [user-name]
+  (user-home/user-home-dir user-name))
+
 (defn user-ssh-dir
  "provides the user .ssh path."
  [user-name]
  (str (user-home-dir user-name) "/.ssh/"))
 
-(s/defn ssh-priv-key-from-env-to-config :- schema/PrivateSshKey
+(s/defn ssh-priv-key-from-env-to-config :- PrivateSshKey
  "function reads ssh private key from environment variable and returns it as a String"
  []
  (let [env-variable "SSH_PRIV_KEY"]

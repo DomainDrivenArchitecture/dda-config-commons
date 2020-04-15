@@ -13,21 +13,26 @@
 ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
+(ns dda.config.commons.1-5.ssh-key-test
+  {:deprecated "1.5"}
+  (:require
+   [clojure.test :refer :all]
+   [schema.core :as s]
+   [dda.config.commons.ssh-key :as sut]))
 
-(ns dda.config.commons.directory-model
-   (:require
-     [clojure.string :as string]
-     [schema.core :as s :include-macros true]))
+(def valid-ssh-pub-key-config
+  {:type "type"
+   :public-key "pub-key"
+   :comment "a comment"})
 
-(s/defn non-root-directory?
-  "Predicate for directory path not empty und not the unix root."
-  [dir :- s/Str]
-  (and
-    (not (string/blank? dir))
-    (< 1 (.length dir))
-    (.endsWith dir "/")))
+(def valid-ssh-priv-key-config
+  "private key")
 
+(def ssh-key-pair-config
+  {:public-key valid-ssh-pub-key-config
+   :private-key valid-ssh-priv-key-config})
 
-(def NonRootDirectory
-  "Represents a directory with trailing /"
-  (s/constrained s/Str non-root-directory?))
+(deftest test-configs
+  (is (s/validate sut/PublicSshKey valid-ssh-pub-key-config))
+  (is (s/validate sut/PrivateSshKey valid-ssh-priv-key-config))
+  (is (s/validate sut/SshKeyPair ssh-key-pair-config)))
