@@ -5,8 +5,18 @@
 [![Slack](https://img.shields.io/badge/chat-clojurians-green.svg?style=flat)](https://clojurians.slack.com/messages/#dda-pallet/) | [<img src="https://meissa-gmbh.de/img/community/Mastodon_Logotype.svg" width=20 alt="team@social.meissa-gmbh.de"> team@social.meissa-gmbh.de](https://social.meissa-gmbh.de/@team) | [Website & Blog](https://domaindrivenarchitecture.org)
 
 ## Compatability
+
 dda-config-commons is compatible to the following versions
  * clojure 1.9
+
+## Purpose
+
+dda-config-commons handles configuration for configuration management systems / provisioning systems. This covers:
+* load & store configuration
+* handle credentials (load from safe places, resolve em, log outputs)
+* tbd. support various data-formats (edn, yml, json)
+* tbd. place for common spec predicates
+* tbd. place for utilities around gpg / maps / user-envs / operatings-system passwords
 
 ## License
 
