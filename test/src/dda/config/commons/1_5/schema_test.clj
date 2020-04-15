@@ -6,7 +6,7 @@
    [clojure.test.check :as tc]
    [clojure.test.check.generators :as gen]
    [clojure.test.check.properties :as prop]
-   [dda.config.commons.schema :as sut]))
+   [dda.config.commons.1-5.schema :as sut]))
 
 
 ; ------------------------  test data  ------------------------

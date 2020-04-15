@@ -18,7 +18,7 @@
   (:require
    [clojure.test :refer :all]
    [schema.core :as s]
-   [dda.config.commons.ssh-key :as sut]))
+   [dda.config.commons.1-5.ssh-key :as sut]))
 
 (def valid-ssh-pub-key-config
   {:type "type"

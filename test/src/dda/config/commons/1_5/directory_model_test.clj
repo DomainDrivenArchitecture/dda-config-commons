@@ -18,7 +18,7 @@
   {:deprecated "1.5"}
   (:require
     [clojure.test :refer :all]
-    [dda.config.commons.directory-model :as sut]))
+    [dda.config.commons.1-5.directory-model :as sut]))
 
 
 

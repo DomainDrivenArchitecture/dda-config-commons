@@ -18,7 +18,7 @@
   (:require
    [clojure.test :refer :all]
    [schema.core :as s]
-   [dda.config.commons.user-home :as sut]))
+   [dda.config.commons.1-5.user-home :as sut]))
 
 (deftest test-user-home
   (s/set-fn-validation! true)

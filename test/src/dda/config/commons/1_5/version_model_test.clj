@@ -19,7 +19,7 @@
   (:require
     [clojure.test :refer :all]
     [schema.core :as s]
-    [dda.config.commons.version-model :as sut]))
+    [dda.config.commons.1-5.version-model :as sut]))
 
 (deftest version-conversions
   (testing "ver_fromstr: string to vector conversion"

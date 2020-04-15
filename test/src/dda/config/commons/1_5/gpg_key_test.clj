@@ -17,7 +17,7 @@
   {:deprecated "1.5"}
   (:require
    [clojure.test :refer :all]
-   [dda.config.commons.gpg-key :as sut]))
+   [dda.config.commons.1-5.gpg-key :as sut]))
 
 (def public-gpg-key
 "-----BEGIN PGP PUBLIC KEY BLOCK-----

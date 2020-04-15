@@ -20,7 +20,7 @@
   (:require
     [clojure.test :refer :all]
     [schema.core :as s]
-    [dda.config.commons.secret :as sut]))
+    [dda.config.commons.1-5.secret :as sut]))
 
 (defmethod sut/resolve-secret :test-resolver
   [secret

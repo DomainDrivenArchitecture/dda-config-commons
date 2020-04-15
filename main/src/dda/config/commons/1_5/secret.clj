@@ -18,7 +18,7 @@
   (:require
     [schema.core :as s]
     [schema.spec.core :as spec]
-    [dda.config.commons.secret.passwordstore :as ps]))
+    [dda.config.commons.1-5.secret.passwordstore :as ps]))
 
 (def SecretSchemas
   (into

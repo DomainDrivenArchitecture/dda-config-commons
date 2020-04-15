@@ -20,7 +20,7 @@
   (:require
     [clojure.test :refer :all]
     [schema.core :as s]
-    [dda.config.commons.secret.passwordstore :as sut]))
+    [dda.config.commons.1-5.secret.passwordstore :as sut]))
 
 (deftest test-trim
   (testing

@@ -18,7 +18,7 @@
   {:deprecated "1.5"}
   (:require
    [schema.core :as s]
-   [dda.config.commons.user-home :as user-home]))
+   [dda.config.commons.1-5.user-home :as user-home]))
 
 (def PublicSshKey
   {:type s/Str

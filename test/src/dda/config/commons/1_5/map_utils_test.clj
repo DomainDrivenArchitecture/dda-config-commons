@@ -20,7 +20,7 @@
     [clojure.test :refer :all]
     [schema.core :as s]
     [schema.experimental.complete :as c]
-    [dda.config.commons.map-utils :as sut]))
+    [dda.config.commons.1-5.map-utils :as sut]))
 
 
 (deftest deep-merge-test
