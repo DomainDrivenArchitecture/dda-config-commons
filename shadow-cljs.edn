@@ -1,0 +1,7 @@
+{:source-paths ["main/src/"
+                "main/test"]
+ :dependencies []
+ :builds       {:app {:target    :node-script
+                      :output-to "hallo-world.js"
+                      :main      dda.config.commons.core/helloworld
+                      :compiler-options {:optimizations :simple}}}}
