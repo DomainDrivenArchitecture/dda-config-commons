@@ -9,3 +9,4 @@
 .shadow-cljs/
 .clj-kondo/
 .lsp/
+.calva/output-window/output.calva-repl
