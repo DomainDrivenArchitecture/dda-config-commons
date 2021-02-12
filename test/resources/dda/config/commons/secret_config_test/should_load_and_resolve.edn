@@ -1,0 +1,4 @@
+{:input "test/resources/dda/config/commons/config.edn"
+ :expected {:join-test "test-123"
+            :nothing ""
+            :included-file {:test "test" :test2 "test2"}}}

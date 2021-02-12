@@ -20,3 +20,5 @@
   [{:keys [profile] :as opts} tag value]
   (read-gopass value))
 
+(defn load-and-resolve [path] (aero/read-config path))
+

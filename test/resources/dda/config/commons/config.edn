@@ -1,1 +1,3 @@
-{:hello "World!"}
+{:join-test #join ["test" "-" "123"]
+ :nothing ""
+ :included-file #include "secret_config_test/include_file.edn"}
