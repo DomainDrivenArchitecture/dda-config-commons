@@ -2,6 +2,6 @@
                 "main/test"]
  :dependencies [[aero "1.1.6"]]
  :builds       {:app {:target    :node-script
-                      :output-to "config-commons.js"
+                      :output-to "target/config-commons.js"
                       :main      dda.config.commons.core/helloworld
                       :compiler-options {:optimizations :simple}}}}

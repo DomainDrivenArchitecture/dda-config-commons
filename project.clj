@@ -4,11 +4,6 @@
   :license {:name "Apache License, Version 2.0"
             :url "https://www.apache.org/licenses/LICENSE-2.0.html"}
   :dependencies [[org.clojure/clojure "1.10.0"]
-                 [prismatic/schema "1.1.10"]
-                 [mvxcvi/clj-pgp "0.10.0"]
-                 [metosin/schema-tools "0.11.0"]
-                 [ch.qos.logback/logback-classic "1.3.0-alpha4" :exclusions [com.sun.mail/javax.mail]]
-                 [commons-codec "1.12"]
                  [aero "1.1.6"]]
   :source-paths ["main/src"]
   :resource-paths ["main/resources"]
@@ -25,12 +20,7 @@
                    [[org.clojure/test.check "0.10.0-alpha4"]
                     [ch.qos.logback/logback-classic "1.3.0-alpha4"]
                     [org.slf4j/jcl-over-slf4j "1.8.0-beta4"]
-                    [dda/data-test "0.1.1"]]
-                   :plugins
-                   [[lein-sub "0.3.0"]]
-                   :leiningen/reply
-                   {:dependencies [[org.slf4j/jcl-over-slf4j "1.8.0-beta0"]]
-                    :exclusions [commons-logging]}}
+                    [dda/data-test "0.1.1"]]}
              :test {:test-paths ["test/src"]
                     :resource-paths ["test/resources"]
                     :dependencies [[dda/data-test "0.1.1"]]}}
