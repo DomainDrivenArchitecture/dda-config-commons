@@ -1,7 +1,7 @@
 (ns dda.config.commons.core
   (:require
-    #?@(:clj []
-        :cljs [])
+    #?(:clj [aero.core :as aero]
+       :cljs [aero.core :as aero])
 ))
 
 (defn helloworld [arg]

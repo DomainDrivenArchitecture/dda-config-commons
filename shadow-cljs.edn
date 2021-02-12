@@ -1,7 +1,7 @@
 {:source-paths ["main/src/"
                 "main/test"]
- :dependencies []
+ :dependencies [[aero "1.1.6"]]
  :builds       {:app {:target    :node-script
-                      :output-to "hallo-world.js"
+                      :output-to "config-commons.js"
                       :main      dda.config.commons.core/helloworld
                       :compiler-options {:optimizations :simple}}}}
