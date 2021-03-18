@@ -18,6 +18,15 @@ dda-config-commons handles configuration for configuration management systems / 
 * tbd. place for common spec predicates
 * tbd. place for utilities around gpg / maps / user-envs / operatings-system passwords
 
+## Usage
+
+Use load-and-resolve to pass an edn file to aero and pull secrets out of gopass.
+Currently supported are the following operations:
+* default operations in aero: #env, #join, #include, etc. (Documented [here](https://github.com/juxt/aero))
+* #gopass [PATH] (load secrets directly from gopass)
+
+Check the config in test for an example.
+
 ## License
 
 Copyright © 2015, 2016, 2017, 2018, 2019 meissa GmbH
