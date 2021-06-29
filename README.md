@@ -29,7 +29,7 @@ Check the config in test for an example.
 
 ## License
 
-Copyright © 2015, 2016, 2017, 2018, 2019 meissa GmbH
+Copyright © 2015, 2016, 2017, 2018, 2019, 2020, 2021 meissa GmbH
 Licensed under the [Apache License, Version 2.0](LICENSE) (the "License")
 Pls. find licenses of our subcomponents [here](doc/SUBCOMPONENT_LICENSE)
 
